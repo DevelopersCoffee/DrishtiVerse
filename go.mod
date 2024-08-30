@@ -1,3 +1,3 @@
-module github.com/ucguy4u/DrishtiVerse/gptclient-service
+module github.com/ucguy4u/DrishtiVerse
 
-go 1.22.5
+go 1.23

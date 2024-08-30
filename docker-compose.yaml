@@ -1,12 +1,12 @@
 version: '3'
 
 services:
-  yugabytedb:
-    image: yugabytedb/yugabyte:2.21.1.0-b20
-    ports:
-      - "5433:5433"
-      - "15433:15433"
-    command: ["/bin/bash", "-c", "bin/yugabyted start --daemon=false"]
+  # yugabytedb:
+  #   image: yugabytedb/yugabyte:2.21.1.0-b20
+  #   ports:
+  #     - "5433:5433"
+  #     - "15433:15433"
+  #   command: ["/bin/bash", "-c", "bin/yugabyted start --daemon=false"]
 
   api-gateway:
     build: ./api-gateway

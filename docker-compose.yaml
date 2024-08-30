@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  yugabytedb:
+    image: yugabytedb/yugabyte:2.21.1.0-b20
+    ports:
+      - "5433:5433"
+      - "15433:15433"
+    command: ["/bin/bash", "-c", "bin/yugabyted start --daemon=false"]
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - gptclient-service
+      - shortstories-service
+      - quiz-service
+    dapr:
+      enabled: true
+      app-id: "api-gateway"
+      app-port: 8080
+      components-path: ./api-gateway/components
+
+  gptclient-service:
+    build: ./gptclient-service
+    ports:
+      - "8081:8081"
+    dapr:
+      enabled: true
+      app-id: "gptclient-service"
+      app-port: 8081
+      components-path: ./gptclient-service/components
+
+  shortstories-service:
+    build: ./shortstories-service
+    ports:
+      - "8082:8082"
+    dapr:
+      enabled: true
+      app-id: "shortstories-service"
+      app-port: 8082
+      components-path: ./shortstories-service/components
+
+  quiz-service:
+    build: ./quiz-service
+    ports:
+      - "8083:8083"
+    dapr:
+      enabled: true
+      app-id: "quiz-service"
+      app-port: 8083
+      components-path: ./quiz-service/components
